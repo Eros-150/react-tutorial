@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Tabla from "./Tabla";
+import Form from "./Form";
 
-function App() {
+
+
+const App = () => {
+  const [personas, setPersonas] = useState([]);
+
+  const eliminarPersona = (indice) => {
+    setPersonas(personas.filter((_, i) => i !== indice));
+  };
+
+  const enviarFormulario = (persona) => {
+    setPersonas([...personas, persona]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>2DAW: Testeando React Eros</h1>
+      <Tabla datosPersonas={personas} eliminarPersona={eliminarPersona} />
+      <Form enviarFormulario={enviarFormulario} />
     </div>
   );
-}
+};
 
 export default App;
+
